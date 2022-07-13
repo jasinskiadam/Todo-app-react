@@ -5,7 +5,7 @@ const Input = ({name, placeholder}) => {
         console.log(e.target.value);
     };
     return (
-        <input type="search" onChange={inputTextHandler} name={name} placeholder={placeholder} />
+        <input type='search' onChange={inputTextHandler} name={name} placeholder={placeholder} />
     );
 };
 
