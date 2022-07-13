@@ -4,7 +4,7 @@ import InputBar from './InputBar';
 const Header = () => {
     return(
         <header>
-            <h1>TO DO APP VANILLA JS</h1>
+            <h1>TO DO APP REACT</h1>
             <InputBar />
         </header>
     );

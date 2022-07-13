@@ -1,12 +1,13 @@
 import React from 'react';
 import Input from './Input';
+import Button from './Button';
 
 const InputBar = () => {
     return (
         <div className="input-bar">
-        <Input />
-        <Input />
-        <button className="add-btn">Add</button>
+            <Input name={"todo-title"} placeholder={"Title..."} />
+            <Input name={"todo-body"} placeholder={"Body..."}/>
+            <Button clName={"add-btn"} content={"Add"}/>
         </div>
     );
 };
