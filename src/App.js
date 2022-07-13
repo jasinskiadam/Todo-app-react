@@ -1,17 +1,12 @@
+import { useState } from 'react';
 import './App.css';
+import Header from './components/Header'
 
 function App() {
+  const [inputTitle, setInputTitle] = useState("");
   return (
     <div className="App wrapper">
-      <header>
-        <h1>TO DO APP REACT</h1>
-        <div className="input-bar">
-          <input type="search" name="todo-title" placeholder="Title..."/>
-          <input type="search" name="todo-body" placeholder="Body..."/>
-          <button className="add-btn">Add</button>
-        </div>
-      </header>
-        
+        <Header />
     </div>
   );
 }
