@@ -1,38 +1,100 @@
-.App {
-  text-align: center;
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Helvetica;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.wrapper {
+    height: 90vh;
+    width: 80vw;
+    display: grid;
+    gap: 70px;
+    justify-content: center;
+    background-color: rgb(232, 232, 220);
+    border-radius: 25px;
+    overflow-y: scroll;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Header */
+
+header {
+    width: 70vw;
+    height: 15vh;
 }
 
-.App-link {
-  color: #61dafb;
+header h1 {
+    text-align: center;
+    padding: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header .input-bar {
+    display: grid;
+    grid-template-columns: 32% 55% 10%;
+    gap: 10px;
+    height: 35px;
+}
+
+header input {
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+header .add-btn {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+header .add-btn:hover{
+    cursor: pointer;
+    background-color: rgb(39, 39, 39);
+}
+
+/* Main */
+
+main {
+    height: 72vh;
+}
+
+main .task {
+    display: grid;
+    grid-template-columns: 15% 60% 11% 11%;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.task-title {
+    font-weight: 900;
+}
+
+main button {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+main button:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Completed task */
+
+main .completed {
+    background-color: rgb(102, 151, 102);
 }
