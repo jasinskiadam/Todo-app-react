@@ -22,7 +22,7 @@ function App() {
           />
       </header>
       <main>
-        <TaskContainer todos={todos}/>
+        <TaskContainer setTodos={setTodos} todos={todos}/>
       </main>
     </div>
   );
