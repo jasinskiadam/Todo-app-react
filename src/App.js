@@ -1,14 +1,29 @@
 import './App.css';
 import { useState } from 'react';
-import Header from './components/Header'
-import Main from './components/Main';
+import Form from './components/Form';
+import TaskContainer from './components/TaskContainer';
 
 function App() {
-  const [inputTitle, setInputTitle] = useState("");
+  
+  const [inputTextTitle, setInputTextTitle] = useState('');
+  const [inputTextBody, setInputTextBody] = useState('');
+  const [todos, setTodos] = useState([]);
   return (
     <div className="App wrapper">
-        <Header />
-        <Main />
+      <header>
+        <h1>TO DO APP REACT</h1>
+        <Form 
+          inputTextTitle={inputTextTitle}
+          inputTextBody={inputTextBody}
+          setInputTextTitle={setInputTextTitle}
+          setInputTextBody={setInputTextBody}
+          todos={todos}
+          setTodos={setTodos}
+          />
+      </header>
+      <main>
+        <TaskContainer todos={todos}/>
+      </main>
     </div>
   );
 }
