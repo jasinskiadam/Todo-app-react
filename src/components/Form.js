@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos }) => {
+const Form = ({ updateTodo, inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos, editTodo, setEditTodo }) => {
 
     const handleChangeTitle = (e) => {
         console.log(e.target.value);
@@ -14,16 +14,22 @@ const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBo
 
     const handleSubmit = e => {
         e.preventDefault();
-        setTodos([
-            ...todos, {
-                id: Math.random()*100,
-                inputTextTitle: inputTextTitle,
-                inputTextBody:inputTextBody,
-                completed: false, 
-            }
-        ])
-        setInputTextBody('');
-        setInputTextTitle('');
+        if(!editTodo){
+            setTodos([
+                ...todos, {
+                    id: Math.random()*100,
+                    inputTextTitle: inputTextTitle,
+                    inputTextBody:inputTextBody,
+                    completed: false, 
+                    editing: false
+                }
+            ])
+            setInputTextBody('');
+            setInputTextTitle('');
+        }
+        else {
+            updateTodo(editTodo.id, inputTextBody, inputTextTitle, editTodo.completed)
+        }
     };
     return (
             <form className='input-bar'>

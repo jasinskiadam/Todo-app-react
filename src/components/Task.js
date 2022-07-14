@@ -2,8 +2,17 @@ import React from 'react'
 
 const Task = ({inputTextTitle, inputTextBody, todo, todos, setTodos}) => {
 
-    const editHandler = () =>{
-        setTodos(todos.filter(el => el.id !== todo.id));
+    const editHandler = () => {
+        setTodos(todos.map((item) => {
+                if(item.id === todo.id) {
+                    return {
+                        ...item,
+                        editing: !item.editing,
+                    };
+                }
+                return item;
+            })
+        );
     }
 
     const completeHandler = () => {
@@ -21,9 +30,9 @@ const Task = ({inputTextTitle, inputTextBody, todo, todos, setTodos}) => {
 
     return (
         <li className={`task ${todo.completed ? 'completed' : ''}`}>
-            <span className={'task-title'}>{inputTextTitle}</span>
+            <span className={'task-title'}>{todo.editing? todo.inputTextTitle : inputTextTitle}</span>
             <span className={'task-body'}>{inputTextBody}</span>
-            <button onClick={editHandler} className={'edit-btn'}>Edit</button>
+            <button onClick={editHandler} className={'edit-btn'}>{todo.editing ? 'Save' : 'Edit'}</button>
             <button onClick={completeHandler} className={'complete-btn'}>Complete</button>
         </li>
     );

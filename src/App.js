@@ -8,6 +8,8 @@ function App() {
   const [inputTextTitle, setInputTextTitle] = useState('');
   const [inputTextBody, setInputTextBody] = useState('');
   const [todos, setTodos] = useState([]);
+  const [editTodo, setEditTodo] = useState(null);
+
   return (
     <div className="App wrapper">
       <header>
@@ -19,10 +21,17 @@ function App() {
           setInputTextBody={setInputTextBody}
           todos={todos}
           setTodos={setTodos}
+          editTodo={editTodo}
+          setEditTodo={setEditTodo}
           />
       </header>
       <main>
-        <TaskContainer setTodos={setTodos} todos={todos}/>
+        <TaskContainer 
+          setTodos={setTodos} 
+          todos={todos} 
+          setEditTodo={setEditTodo} 
+          editTodo={editTodo} 
+        />
       </main>
     </div>
   );
