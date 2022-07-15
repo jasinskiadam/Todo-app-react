@@ -1,7 +1,7 @@
 import React from 'react'
 import Task from './Task';
 
-const TaskContainer = ({ todos, setTodos, editTodo, setEditTodo, setInputTextBody, setInputTextTitle, inputTextTitle, inputTextBody, todoTitle, todoBody }) => {
+const TaskContainer = ({ todos, setTodos, setInputTextBody, setInputTextTitle, inputTextTitle, inputTextBody }) => {
     
     return (
         <ul className="task-container">
@@ -11,14 +11,10 @@ const TaskContainer = ({ todos, setTodos, editTodo, setEditTodo, setInputTextBod
                     setTodos={setTodos}
                     todos={todos}
                     todo={todo}
-                    todoTitle={todo.inputTextTitle}
-                    todoBody={todo.inputTextBody}
                     inputTextTitle={inputTextTitle}
                     inputTextBody={inputTextBody}
                     setInputTextTitle={setInputTextTitle}
                     setInputTextBody={setInputTextBody}
-                    setEditTodo={setEditTodo}
-                    editTodo={editTodo}
                 />
             ))}
         </ul>

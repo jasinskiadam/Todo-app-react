@@ -1,5 +1,7 @@
 import React from 'react'
-const Task = ({ inputTextTitle, inputTextBody, todo, todos, todoTitle, todoBody,setTodos, setInputTextTitle,setInputTextBody }) => {
+const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBody, todo, todos, setTodos }) => {
+
+    // Update Todo item
 
     const updateTodo = () =>{
         setTodos(todos.map((item) => {
@@ -18,29 +20,34 @@ const Task = ({ inputTextTitle, inputTextBody, todo, todos, todoTitle, todoBody,
     );
     };
 
+    // Save updated Todo item
+
     const saveTodo = () => {
         setTodos(todos.map((item) => {
-            if(item.editing) {
-                setInputTextTitle('');
-                setInputTextBody('');
-                return {
-                    ...item,
-                    editing: !item.editing,
-                    inputTextTitle: inputTextTitle,
-                    inputTextBody: inputTextBody,
-                }; 
-            }
-            return item;
-        })
-        
-    );
+                if(item.editing) {
+                    setInputTextTitle('');
+                    setInputTextBody('');
+                    return {
+                        ...item,
+                        editing: !item.editing,
+                        inputTextTitle: inputTextTitle,
+                        inputTextBody: inputTextBody,
+                    }; 
+                }
+                return item;
+            })
+        );
     }
+
+    // Handle edit
 
     const editHandler = () => {
         const findTodo = todos.find((item) => item.id === todo.id);
         setTodos({...findTodo, editing: !findTodo.editing});
-        !findTodo.editing ? updateTodo() :saveTodo();
+        findTodo.editing ? saveTodo() : updateTodo();
     }
+
+    // Handle complete
 
     const completeHandler = () => {
         setTodos(todos.map((item) => {
@@ -57,8 +64,8 @@ const Task = ({ inputTextTitle, inputTextBody, todo, todos, todoTitle, todoBody,
 
     return (
         <li className={`task ${todo.completed ? 'completed' : ''}`}>
-            <span className={'task-title'}>{todoTitle}</span>
-            <span className={'task-body'}>{todoBody}</span>
+            <span className={'task-title'}>{todo.inputTextTitle}</span>
+            <span className={'task-body'}>{todo.inputTextBody}</span>
             <button onClick={editHandler} className={'edit-btn'}>{!todo.editing ? 'Edit' : 'Save'}</button>
             <button onClick={completeHandler} className={'complete-btn'}>Complete</button>
         </li>

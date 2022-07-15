@@ -2,6 +2,8 @@ import React from 'react';
 
 const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos }) => {
 
+    //Handle input
+
     const handleChangeTitle = (e) => {
         setInputTextTitle(e.target.value);
     };
@@ -9,6 +11,8 @@ const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBo
     const handleChangeBody = e => {
         setInputTextBody(e.target.value);
     };
+
+    // Add new Todo
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -24,6 +28,7 @@ const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBo
             setInputTextBody('');
             setInputTextTitle('');
     };
+
     return (
             <form className='input-bar'>
                 <input 
