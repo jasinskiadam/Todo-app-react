@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from "axios";
 
-const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos }) => {
+const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos, todo }) => {
 
     //Handle input
 
@@ -14,17 +15,21 @@ const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBo
 
     // Add new Todo
 
+    const data = {
+        id: Math.random()*100,
+        inputTextTitle: inputTextTitle,
+        inputTextBody:  inputTextBody,
+        completed: false, 
+        editing: false
+    };
+
     const handleSubmit = e => {
         e.preventDefault();
-            setTodos([
-                ...todos, {
-                    id: Math.random()*100,
-                    inputTextTitle: inputTextTitle,
-                    inputTextBody:  inputTextBody,
-                    completed: false, 
-                    editing: false
-                }
-            ])
+            setTodos([...todos, data]);
+
+            //POST TODOS
+
+            axios.post("http://localhost:3000/todos", data);
             setInputTextBody('');
             setInputTextTitle('');
     };

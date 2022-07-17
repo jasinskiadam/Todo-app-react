@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import axios from "axios";
 import Form from './components/Form';
 import TaskContainer from './components/TaskContainer';
 
@@ -9,14 +10,18 @@ function App() {
   const [inputTextBody, setInputTextBody] = useState('');
   const [todos, setTodos] = useState([]);
 
+// GET TODOS
+
   const getTodos = () =>
-    fetch("http://localhost:3000/todos")
-      .then((data) => data.json())
-      .then((data) => setTodos(data));
+    axios
+      .get("http://localhost:3000/todos")
+      .then((resp) => setTodos(resp.data));
 
   useEffect(() => {
     getTodos();
   }, []);
+
+  
 
   return (
     <div className="App wrapper">

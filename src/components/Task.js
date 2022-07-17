@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBody, todo, todos, setTodos }) => {
 
@@ -17,6 +18,7 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
             }
             return item;
         })
+        
     );
     };
 
@@ -34,9 +36,12 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
                         inputTextBody: inputTextBody,
                     }; 
                 }
+                
                 return item;
             })
+            
         );
+        
     }
 
     // Handle edit
@@ -45,6 +50,10 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
         const findTodo = todos.find((item) => item.id === todo.id);
         setTodos({...findTodo, editing: !findTodo.editing});
         findTodo.editing ? saveTodo() : updateTodo();
+
+        // PUT TODOS
+
+        axios.put(`http://localhost:3000/todos/${findTodo.id}`, findTodo)        
     }
 
     // Handle complete
@@ -66,6 +75,9 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
 
     const deleteHandler = () => {
         setTodos(todos.filter((item) => item.id !== todo.id));
+
+        // DELETE TODOS 
+        axios.delete(`http://localhost:3000/todos/${todo.id}`)
     }
 
     return (
