@@ -63,7 +63,7 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
     }
 
     const deleteHandler = () => {
-        
+        setTodos(todos.filter((item) => item.id !== todo.id));
     }
 
     return (
