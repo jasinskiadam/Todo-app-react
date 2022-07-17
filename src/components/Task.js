@@ -62,12 +62,17 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
         );
     }
 
+    const deleteHandler = () => {
+        
+    }
+
     return (
         <li className={`task ${todo.completed ? 'completed' : ''}`}>
             <span className={'task-title'}>{todo.inputTextTitle}</span>
             <span className={'task-body'}>{todo.inputTextBody}</span>
             <button onClick={editHandler} className={'edit-btn'}>{!todo.editing ? 'Edit' : 'Save'}</button>
             <button onClick={completeHandler} className={'complete-btn'}>Complete</button>
+            <button onClick={deleteHandler} className={'delete-btn'}>Delete</button>
         </li>
     );
 }
