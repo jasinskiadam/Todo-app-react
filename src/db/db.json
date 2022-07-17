@@ -1,0 +1,25 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "inputTextTitle": "Dom",
+            "inputTextBody": "Posprzatac dom",
+            "completed": false,
+            "editing": false
+        },
+        {
+            "id": 2,
+            "inputTextTitle": "Szkola",
+            "inputTextBody": "Posprzatac szkole",
+            "completed": false,
+            "editing": true
+        },
+        {
+            "id": 3,
+            "inputTextTitle": "Praca",
+            "inputTextBody": "Wykonac prace",
+            "completed": true,
+            "editing": false
+        }
+    ]
+}
