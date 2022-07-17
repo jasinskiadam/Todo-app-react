@@ -119,7 +119,7 @@ main {
 
 main .task {
     display: grid;
-    grid-template-columns: 15% 60% 11% 11%;
+    grid-template-columns: 12% 55% 9% 10% 9%;
     align-items: center;
     gap: 10px;
     list-style: none;
@@ -134,21 +134,26 @@ main .task {
 }
 
 main button {
-    background-color: #fff;
+    background-color: #000;
+    color: #fff;
     border-radius: 5px;
     padding: 5px;
 }
 
 main button:hover {
     cursor: pointer;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
 }
 
 /* Completed task */
 
 main .completed {
     background-color: var(--completed-color);
+}
+
+main .completed span {
+    text-decoration: line-through;
 }
 
 /* Neon animations */
