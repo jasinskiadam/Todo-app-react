@@ -1,10 +1,9 @@
 import axios from 'axios';
-import React from 'react'
 const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBody, todo, todos, setTodos }) => {
 
     // Update Todo item
 
-    const updateTodo = () =>{
+    const updateTodo = () =>{       
         setTodos(todos.map((item) => {
             if(item.id === todo.id) {
                 setInputTextTitle(item.inputTextTitle);
@@ -18,42 +17,39 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
             }
             return item;
         })
-        
-    );
+        );
     };
 
-    // Save updated Todo item
 
+    // Save updated Todo item
+    
     const saveTodo = () => {
-        setTodos(todos.map((item) => {
+          setTodos(todos.map((item) => {
+            let data;
                 if(item.editing) {
                     setInputTextTitle('');
                     setInputTextBody('');
-                    return {
-                        ...item,
+                    data = {
+                        id: item.id,
                         editing: !item.editing,
                         inputTextTitle: inputTextTitle,
                         inputTextBody: inputTextBody,
-                    }; 
-                }
+                    };
                 
-                return item;
-            })
-            
-        );
-        
+                    // PUATCH TODOS
+                    axios.patch(`http://localhost:3000/todos/${todo.id}`, data);
+                } 
+                else data = item; 
+                return data;
+            }));
     }
 
     // Handle edit
 
     const editHandler = () => {
         const findTodo = todos.find((item) => item.id === todo.id);
-        setTodos({...findTodo, editing: !findTodo.editing});
-        findTodo.editing ? saveTodo() : updateTodo();
-
-        // PUT TODOS
-
-        axios.put(`http://localhost:3000/todos/${findTodo.id}`, findTodo)        
+        setTodos({...findTodo, editing: !findTodo.editing});      
+        findTodo.editing ? saveTodo() : updateTodo(); 
     }
 
     // Handle complete
