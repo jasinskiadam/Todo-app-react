@@ -1,17 +1,17 @@
 import axios from 'axios';
-const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBody, todo, todos, setTodos }) => {
+const Task = ({ title, body, setTitle, setBody, todo, todos, setTodos }) => {
 
     // Update Todo item
 
     const updateTodo = () =>{       
         setTodos(todos.map((item) => {
             if(item.id === todo.id) {
-                setInputTextTitle(item.inputTextTitle);
-                setInputTextBody(item.inputTextBody);
+                setTitle(item.title);
+                setBody(item.body);
                 return {
                     ...item,
-                    inputTextTitle: item.inputTextTitle,
-                    inputTextBody: item.inputTextBody,
+                    title: item.title,
+                    body: item.body,
                     editing: !item.editing
                 }; 
             }
@@ -27,16 +27,16 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
           setTodos(todos.map((item) => {
             let data;
                 if(item.editing) {
-                    setInputTextTitle('');
-                    setInputTextBody('');
+                    setTitle('');
+                    setBody('');
                     data = {
                         id: item.id,
                         editing: !item.editing,
-                        inputTextTitle: inputTextTitle,
-                        inputTextBody: inputTextBody,
+                        title: title,
+                        body: body,
                     };
                 
-                    // PUATCH TODOS
+                    // PATCH TODOS
                     axios.patch(`http://localhost:3000/todos/${todo.id}`, data);
                 } 
                 else data = item; 
@@ -59,7 +59,7 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
                 if(item.id === todo.id) {
                     return {
                         ...item,
-                        completed: !item.completed,
+                        isComplete: !item.isComplete,
                     };
                 }
                 return item;
@@ -77,9 +77,9 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
     }
 
     return (
-        <li className={`task ${todo.completed ? 'completed' : ''}`}>
-            <span className={'task-title'}>{todo.inputTextTitle}</span>
-            <span className={'task-body'}>{todo.inputTextBody}</span>
+        <li className={`task ${todo.isComplete ? 'completed' : ''}`}>
+            <span className={'task-title'}>{todo.title}</span>
+            <span className={'task-body'}>{todo.body}</span>
             <button onClick={editHandler} className={'edit-btn'}>{!todo.editing ? 'Edit' : 'Save'}</button>
             <button onClick={completeHandler} className={'complete-btn'}>Complete</button>
             <button onClick={deleteHandler} className={'delete-btn'}>Delete</button>

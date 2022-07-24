@@ -1,25 +1,25 @@
 import React from 'react';
 import axios from "axios";
 
-const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBody, todos, setTodos, todo }) => {
+const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo }) => {
 
-    //Handle input
+    //Handle input 
 
     const handleChangeTitle = (e) => {
-        setInputTextTitle(e.target.value);
+        setTitle(e.target.value);
     };
 
     const handleChangeBody = e => {
-        setInputTextBody(e.target.value);
+        setBody(e.target.value);
     };
 
     // Add new Todo
 
     const data = {
-        id: Math.random()*100,
-        inputTextTitle: inputTextTitle,
-        inputTextBody:  inputTextBody,
-        completed: false, 
+        id: `62d9459af23${Math.random().toString(16).slice(2)}`,
+        title: title,
+        body:  body,
+        isComplete: false, 
         editing: false
     };
 
@@ -30,20 +30,20 @@ const Form = ({ inputTextTitle, setInputTextTitle, inputTextBody, setInputTextBo
             //POST TODOS
 
             axios.post("http://localhost:3000/todos", data);
-            setInputTextBody('');
-            setInputTextTitle('');
+            setBody('');
+            setTitle('');
     };
 
     return (
             <form className='input-bar'>
                 <input 
-                    value={inputTextTitle}
+                    value={title}
                     onChange={handleChangeTitle}
                     className={'todo-title'}
                     placeholder={'Title...'} 
                 />
                 <input 
-                    value={inputTextBody} 
+                    value={body} 
                     onChange={handleChangeBody} 
                     className={'todo-body'} 
                     placeholder={'Body...'}

@@ -6,44 +6,42 @@ import TaskContainer from './components/TaskContainer';
 
 function App() {
   
-  const [inputTextTitle, setInputTextTitle] = useState('');
-  const [inputTextBody, setInputTextBody] = useState('');
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
   const [todos, setTodos] = useState([]);
 
 // GET TODOS
 
   const getTodos = () =>
     axios
-      .get("http://localhost:3000/todos")
+      .get("http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos")
       .then((resp) => setTodos(resp.data));
 
   useEffect(() => {
     getTodos();
-  }, []);
-
-  
+  }, []); 
 
   return (
     <div className="App wrapper">
       <header>
         <h1>TO DO APP REACT</h1>
         <Form 
-          inputTextTitle={inputTextTitle}
-          inputTextBody={inputTextBody}
-          setInputTextTitle={setInputTextTitle}
-          setInputTextBody={setInputTextBody}
           todos={todos}
           setTodos={setTodos}
+          title={title}
+          setTitle={setTitle}
+          body={body}
+          setBody={setBody}
           />
       </header>
       <main>
         <TaskContainer 
+          todos={todos}
           setTodos={setTodos} 
-          todos={todos} 
-          setInputTextTitle={setInputTextTitle}
-          setInputTextBody={setInputTextBody}
-          inputTextTitle={inputTextTitle}
-          inputTextBody={inputTextBody}
+          title={title}
+          setTitle={setTitle}
+          body={body} 
+          setBody={setBody}
         />
       </main>
     </div>

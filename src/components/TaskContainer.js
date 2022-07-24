@@ -1,20 +1,20 @@
 import React from 'react'
 import Task from './Task';
 
-const TaskContainer = ({ todos, setTodos, setInputTextBody, setInputTextTitle, inputTextTitle, inputTextBody }) => {
+const TaskContainer = ({ todos, setTodos, setBody, setTitle, title, body }) => {
     
     return (
         <ul className="task-container">
             {todos.map((todo) => (
                 <Task 
                     key={todo.id}
-                    setTodos={setTodos}
-                    todos={todos}
                     todo={todo}
-                    inputTextTitle={inputTextTitle}
-                    inputTextBody={inputTextBody}
-                    setInputTextTitle={setInputTextTitle}
-                    setInputTextBody={setInputTextBody}
+                    todos={todos}
+                    setTodos={setTodos}
+                    title={title}
+                    setTitle={setTitle}
+                    setBody={setBody}
+                    body={body}
                 />
             ))}
         </ul>
