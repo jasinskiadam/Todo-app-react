@@ -148,11 +148,11 @@ main button:hover {
 
 /* Completed task */
 
-main .completed {
+main .isComplete {
     background-color: var(--completed-color);
 }
 
-main .completed span {
+main .isComplete span {
     text-decoration: line-through;
 }
 

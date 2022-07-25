@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from "axios";
+import { API_URL } from '../API';
 
-const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo ,API_URL }) => {
+const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo }) => {
 
     //Handle input 
 

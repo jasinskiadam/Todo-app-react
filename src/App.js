@@ -4,14 +4,13 @@ import axios from "axios";
 import Form from './components/Form';
 import TaskContainer from './components/TaskContainer';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { API_URL } from './API';
 
 function App() {
   
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [todos, setTodos] = useState([]);
-
-  const API_URL = 'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos';
 
 // GET TODOS
 

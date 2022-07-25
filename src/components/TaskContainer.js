@@ -1,7 +1,7 @@
 import React from 'react'
 import Task from './Task';
 
-const TaskContainer = ({ todos, setTodos, setBody, setTitle, title, body, API_URL }) => {
+const TaskContainer = ({ todos, setTodos, setBody, setTitle, title, body }) => {
     
     return (
         <ul className="task-container">
@@ -15,7 +15,6 @@ const TaskContainer = ({ todos, setTodos, setBody, setTitle, title, body, API_UR
                     setTitle={setTitle}
                     setBody={setBody}
                     body={body}
-                    API_URL={API_URL}
                 />
             ))}
         </ul>
