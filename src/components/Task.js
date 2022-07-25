@@ -25,22 +25,23 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
     
     const saveTodo = () => {
           setTodos(todos.map((item) => {
-            let data;
-                if(item.editing) {
-                    setInputTextTitle('');
-                    setInputTextBody('');
-                    data = {
-                        id: item.id,
-                        editing: !item.editing,
-                        inputTextTitle: inputTextTitle,
-                        inputTextBody: inputTextBody,
-                    };
-                
-                    // PUATCH TODOS
-                    axios.patch(`http://localhost:3000/todos/${todo.id}`, data);
-                } 
-                else data = item; 
-                return data;
+
+            let data = {
+                id: item.id,
+                editing: !item.editing,
+                inputTextTitle: inputTextTitle,
+                inputTextBody: inputTextBody,
+            };
+
+            if(item.editing) {
+                setInputTextTitle('');
+                setInputTextBody('');
+                // PATCH TODOS
+                axios.patch(`http://localhost:3000/todos/${todo.id}`, data);
+            }
+            else data = item;
+            
+            return data;
             }));
     }
 
@@ -56,13 +57,12 @@ const Task = ({ inputTextTitle, inputTextBody, setInputTextTitle, setInputTextBo
 
     const completeHandler = () => {
         setTodos(todos.map((item) => {
+            const data = { ...item, completed: !item.completed };
                 if(item.id === todo.id) {
-                    return {
-                        ...item,
-                        completed: !item.completed,
-                    };
+                    axios.patch(`http://localhost:3000/todos/${todo.id}`, data);
+                    return data;
                 }
-                return item;
+            return item;
             })
         );
     }
