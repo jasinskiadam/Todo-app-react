@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import Form from './components/Form';
 import TaskContainer from './components/TaskContainer';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import { API_URL } from './API';
+import Welcome from './components/Welcome';
 
 function App() {
   
@@ -28,6 +29,10 @@ function App() {
       <div className="App wrapper">
         <header>
           <h1>TO DO APP REACT</h1>
+          <nav>
+            <Link to='/'>Home</Link>
+            <Link to='/todos'>Todos</Link>
+          </nav>
           <Form 
             todos={todos}
             setTodos={setTodos}
@@ -55,6 +60,7 @@ function App() {
                 />
               }
             />
+            <Route path='/' element={<Welcome />} />
           </Routes>
         </main>
       </div>
