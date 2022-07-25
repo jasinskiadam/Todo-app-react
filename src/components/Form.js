@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo }) => {
+const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo ,API_URL }) => {
 
     //Handle input 
 
@@ -28,8 +28,7 @@ const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo }) => {
             setTodos([...todos, data]);
 
             //POST TODOS
-
-            axios.post("http://localhost:3000/todos", data);
+            axios.post(`${API_URL}`, data);
             setBody('');
             setTitle('');
     };
