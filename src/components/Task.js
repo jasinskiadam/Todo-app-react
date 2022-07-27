@@ -1,7 +1,10 @@
 import axios from 'axios';
+import { useContext } from 'react';
 import { API_URL } from '../API';
-const Task = ({ title, body, setTitle, setBody, todo, todos, setTodos }) => {
-
+import { TaskContext } from './TaskProvider';
+const Task = ({ todo}) => {
+    
+    const {title, setTitle, body, setBody , todos, setTodos } = useContext(TaskContext);
     // Update Todo item
 
     const updateTodo = () =>{       

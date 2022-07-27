@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext}from 'react';
 import axios from "axios";
 import { API_URL } from '../API';
+import { TaskContext } from './TaskProvider';
 
-const Form = ({ title, setTitle, body, setBody, todos, setTodos, todo }) => {
-
+const Form = () => {
+    const {title, setTitle, body, setBody , todos, setTodos } = useContext(TaskContext);
     //Handle input 
 
     const handleChangeTitle = (e) => {
