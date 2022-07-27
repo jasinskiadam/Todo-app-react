@@ -1,26 +1,11 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-
 import Form from './components/Form';
 import TaskContainer from './components/TaskContainer';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL } from './API';
 import Welcome from './components/Welcome';
-import { TaskProvider} from './components/TaskProvider';
+import { TaskProvider } from './components/TaskProvider';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  const getTodos = () =>
-    axios
-      .get(API_URL)
-      .then((resp) => setTodos(resp.data))
-      .catch((err) => console.log('ERROR'));
-
-  useEffect(() => {
-    getTodos();
-  }, []);
   return (
     <Router>
       <TaskProvider>
@@ -33,10 +18,9 @@ function App() {
             </nav>
             <Form />
           </header>
-
           <main>
             <Routes>
-              <Route path='/todos' element={<TaskContainer todos={todos} />} />
+              <Route path='/todos' element={<TaskContainer />} />
               <Route path='/' element={<Welcome />} />
             </Routes>
           </main>
