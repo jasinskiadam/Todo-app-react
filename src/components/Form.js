@@ -1,19 +1,18 @@
 import React, {useContext}from 'react';
 import axios from "axios";
 import { API_URL } from '../API';
-import { TaskContext } from './TaskProvider';
+import { TaskContext } from '../providers/TaskProvider';
+import { useForm } from '../hooks/useForm';
+
+const initialFormState = {
+    title: '',
+    body: '',
+}
 
 const Form = () => {
-    const {title, setTitle, body, setBody , todos, setTodos } = useContext(TaskContext);
-    //Handle input 
+    const {title, body, todos, setTodos } = useContext(TaskContext);
+    const {formValues, handleInputChange, handleClearForm} = useForm(initialFormState);
 
-    const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const handleChangeBody = e => {
-        setBody(e.target.value);
-    };
 
     // Add new Todo
 
@@ -31,21 +30,22 @@ const Form = () => {
 
             //POST TODOS
             axios.post(`${API_URL}`, data);
-            setBody('');
-            setTitle('');
+            handleClearForm(initialFormState);
     };
 
     return (
             <form className='input-bar'>
                 <input 
+                    name='Title'
                     value={title}
-                    onChange={handleChangeTitle}
+                    onChange={handleInputChange}
                     className={'todo-title'}
                     placeholder={'Title...'} 
                 />
                 <input 
+                    name='Body'
                     value={body} 
-                    onChange={handleChangeBody} 
+                    onChange={handleInputChange} 
                     className={'todo-body'} 
                     placeholder={'Body...'}
                 />

@@ -3,7 +3,7 @@ import Form from './components/Form';
 import TaskContainer from './components/TaskContainer';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Welcome from './components/Welcome';
-import { TaskProvider } from './components/TaskProvider';
+import { TaskProvider } from './providers/TaskProvider';
 
 function App() {
   return (

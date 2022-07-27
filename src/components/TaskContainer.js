@@ -1,9 +1,9 @@
 import Task from './Task';
 import { useContext } from 'react';
-import { TaskContext } from './TaskProvider';
+import { TaskContext } from '../providers/TaskProvider';
 
 const TaskContainer = () => {
-    const {todos } =
+    const { todos } =
     useContext(TaskContext);
   return (
     <ul className='task-container'>
