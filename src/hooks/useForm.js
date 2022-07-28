@@ -4,6 +4,10 @@ import { TaskContext } from '../providers/TaskProvider';
 const actionTypes = {
   inputChange: 'INPUT CHANGE',
   clearValues: 'CLEAR VALUES',
+  get: 'GET',
+  post: 'POST',
+  put: 'PUT',
+  delete: 'DELETE'
 };
 
 const reducer = (state, action) => {
@@ -17,6 +21,21 @@ const reducer = (state, action) => {
       return {
         ...action.initialValues,
       };
+    case actionTypes.get:
+      return {
+        //API.get(baseURL)
+        // .then((resp) => setTodos(resp.data))
+        // .catch((err) => console.log('ERROR'))
+      };
+    // case actionTypes.post:
+    //   return{
+    //     todos: ,
+    //   };
+    // case actionTypes.addTask:
+    //   return {
+    //     ...state,
+    //     todos: [...state, action.payload],
+    //   };
     default:
       return state;
   }
@@ -30,7 +49,10 @@ export const useForm = (initialValues) => {
     dispatch({
       type: actionTypes.inputChange,
       field: e.target.name,
-      value: e.target.name==='Title' ? setTitle(e.target.value) : setBody(e.target.value),
+      value:
+        e.target.name === 'Title'
+          ? setTitle(e.target.value)
+          : setBody(e.target.value),
     });
   };
 
@@ -40,7 +62,6 @@ export const useForm = (initialValues) => {
       initialValues,
     });
   };
-  
 
   return {
     formValues,
