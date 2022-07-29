@@ -3,10 +3,12 @@ import { useContext } from 'react';
 import { TaskContext } from '../providers/TaskProvider';
 
 const TaskContainer = () => {
-  const { todos } = useContext(TaskContext);
+  const { state } = useContext(TaskContext);
+
   return (
     <ul className='task-container'>
-      {todos.map((todo) => (
+      {state.todos.map((todo) => (
+        
         <Task key={todo.id} todo={todo} />
       ))}
     </ul>

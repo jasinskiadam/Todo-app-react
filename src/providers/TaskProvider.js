@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useRequest } from '../hooks/useRequest';
 export const TaskContext = createContext({
   title: '',
   body: '',
@@ -15,24 +15,27 @@ export const TaskContext = createContext({
 });
 
 export const TaskProvider = ({ children }) => {
+  const BASE_URL =
+    'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos';
+
+  const {state} = useRequest(BASE_URL);
+
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [todos, setTodos] = useState([]);
 
-  const BASE_URL =
-    'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos';
-
+  console.log(`state`, state)
   // GET TODOS
 
-  const getTodos = () =>
-    axios
-      .get(BASE_URL)
-      .then((resp) => setTodos(resp.data))
-      .catch((err) => console.log('ERROR'));
+  // const getTodos = () =>
+  //   axios
+  //     .get(BASE_URL)
+  //     .then((resp) => setTodos(resp.data))
+  //     .catch((err) => console.log('ERROR'));
 
-  useEffect(() => {
-    getTodos();
-  }, []);
+  // useEffect(() => {
+  //   getTodos();
+  // }, []);
 
   // // ADD TODO
   // const handleAdd = (data) => {
@@ -124,6 +127,7 @@ export const TaskProvider = ({ children }) => {
   return (
     <TaskContext.Provider
       value={{
+        state,
         todos,
         setTodos,
         title,

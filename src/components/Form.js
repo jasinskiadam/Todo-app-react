@@ -3,7 +3,6 @@ import { TaskContext } from '../providers/TaskProvider';
 import { useForm } from '../hooks/useForm';
 import { useTask } from '../hooks/useTask';
 
-
 const initialFormState = {
   title: '',
   body: '',
@@ -14,7 +13,7 @@ const Form = () => {
   const { handleInputChange, handleClearForm } = useForm(initialFormState);
   const { handleAdd } = useTask(todos);
 
-  const data = {
+  const newTodo = {
     id: `62d9459af23${Math.random().toString(16).slice(2)}`,
     title: title,
     body: body,
@@ -26,7 +25,8 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(data);
+    handleAdd(newTodo);
+    console.log(`in submit todos: `, todos);
     handleClearForm(initialFormState);
   };
 

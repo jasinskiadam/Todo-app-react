@@ -3,23 +3,32 @@ import { TaskContext } from '../providers/TaskProvider';
 import axios from 'axios';
 
 const actionTypes = {
-  addTodo: 'ADD TODO',
-  deleteTodo: 'DELETE TODO',
+  addTodo: 'ADD_TODO',
+  deleteTodo: 'DELETE_TODO',
 };
 
-const reducer = (state, action) => {
+// const newTodo = (todo) => {
+//   return {
+//     id: todo.id,
+//     title: todo.title,
+//     body: todo.body,
+//     isComplete: todo.isComplete,
+//     editing: todo.editing,
+//   };
+// };
+
+const reducer = (state= {todos: []}, action) => {
   switch (action.type) {
     case actionTypes.addTodo:
       return {
         ...state,
-        todos: [console.log(...state), console.log(action.payload)],
-        api: action.api
+        todos: [...state.todos, action.payload]
       };
     case actionTypes.deleteTodo:
       return {
         ...state,
-        todos: state.filter(todo => todo.id !== action.payload),
-        api: action.api
+        todos: state.filter((todo) => todo.id !== action.payload),
+        api: action.api,
       };
     default:
       return state;
@@ -27,29 +36,30 @@ const reducer = (state, action) => {
 };
 
 export const useTask = (initialState) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const { todos, BASE_URL } = useContext(TaskContext);
+  const {  BASE_URL,state} = useContext(TaskContext);
+  const [test, dispatch] = useReducer(reducer, state);
 
-    // ADD TODO
-    const handleAdd = (todo) => {
-      dispatch({
-        type: actionTypes.addTodo,
-        payload: {...todos, todo},
-        api: axios.post(`${BASE_URL}`, todo),
-      });
-    };
+  // ADD TODO
+  const handleAdd = (todo) => {
+    dispatch({
+      type: actionTypes.addTodo,
+      //payload: console.log([...state,todo]),//[console.log(`state aft`,...todos), console.log(`payload aft`,todo)],
+      payload: console.log(`todo`,todo),
+      //api: axios.post(`${BASE_URL}`, todo),
+    });
+  };
 
-    const handleDelete = (id) => {
-      dispatch({
-        type: actionTypes.deleteTodo,
-        payload: id,
-        api: axios.delete(`${BASE_URL}/${id}`),
-      })
-    } 
+  const handleDelete = (id) => {
+    dispatch({
+      type: actionTypes.deleteTodo,
+      payload: id,
+      api: axios.delete(`${BASE_URL}/${id}`),
+    });
+  };
 
   return {
     state,
     handleAdd,
-    handleDelete
+    handleDelete,
   };
 };
