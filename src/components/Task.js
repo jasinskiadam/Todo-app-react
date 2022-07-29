@@ -1,7 +1,9 @@
 import { useContext } from 'react';
+import { useTask } from '../hooks/useTask';
 import { TaskContext } from '../providers/TaskProvider';
 const Task = ({ todo }) => {
-  const { handleEdit, handleDelete, handleComplete } = useContext(TaskContext);
+  const { handleEdit, handleComplete, todos } = useContext(TaskContext);
+  const { handleDelete } = useTask(todos)
 
   const editTodo = () => {
     handleEdit(todo);
@@ -10,9 +12,9 @@ const Task = ({ todo }) => {
   const completeTodo = () => {
     handleComplete(todo);
   };
-
+  
   const deleteTodo = () => {
-    handleDelete(todo);
+    handleDelete(todo.id);
   };
 
   return (

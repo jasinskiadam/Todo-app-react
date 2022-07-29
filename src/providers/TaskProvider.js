@@ -9,7 +9,6 @@ export const TaskContext = createContext({
   setTitle: () => {},
   setBody: () => {},
   setTodos: () => {},
-  handleAdd: () => {},
   handleDelete: () => {},
   handleEdit: () => {},
   handleComplete: () => {},
@@ -35,11 +34,11 @@ export const TaskProvider = ({ children }) => {
     getTodos();
   }, []);
 
-  // ADD TODO
-  const handleAdd = (data) => {
-    setTodos([...todos, data]);
-    axios.post(`${BASE_URL}`, data);
-  };
+  // // ADD TODO
+  // const handleAdd = (data) => {
+  //   setTodos([...todos, data]);
+  //   axios.post(`${BASE_URL}`, data);
+  // };
 
   // DELETE TODO
   const handleDelete = (todo) => {
@@ -133,7 +132,6 @@ export const TaskProvider = ({ children }) => {
         setBody,
         BASE_URL,
         handleEdit,
-        handleAdd,
         handleDelete,
         handleComplete,
       }}

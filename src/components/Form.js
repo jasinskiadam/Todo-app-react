@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { TaskContext } from '../providers/TaskProvider';
 import { useForm } from '../hooks/useForm';
+import { useTask } from '../hooks/useTask';
+
 
 const initialFormState = {
   title: '',
@@ -8,8 +10,9 @@ const initialFormState = {
 };
 
 const Form = () => {
-  const { title, body, handleAdd } = useContext(TaskContext);
+  const { title, body, todos } = useContext(TaskContext);
   const { handleInputChange, handleClearForm } = useForm(initialFormState);
+  const { handleAdd } = useTask(todos);
 
   const data = {
     id: `62d9459af23${Math.random().toString(16).slice(2)}`,

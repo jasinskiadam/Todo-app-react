@@ -3,8 +3,7 @@ import { useContext } from 'react';
 import { TaskContext } from '../providers/TaskProvider';
 
 const TaskContainer = () => {
-    const { todos } =
-    useContext(TaskContext);
+  const { todos } = useContext(TaskContext);
   return (
     <ul className='task-container'>
       {todos.map((todo) => (
