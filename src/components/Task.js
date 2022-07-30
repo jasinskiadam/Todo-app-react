@@ -1,9 +1,7 @@
 import { useContext } from 'react';
-import { useTask } from '../hooks/useTask';
-import { TaskContext } from '../providers/TaskProvider';
+import { TaskContext } from '../providers/TodoProvider';
 const Task = ({ todo }) => {
-  const { handleEdit, handleComplete, todos } = useContext(TaskContext);
-  const { handleDelete } = useTask(todos)
+  const { handleEdit, handleComplete, handleDelete } = useContext(TaskContext);
 
   const editTodo = () => {
     handleEdit(todo);
@@ -12,9 +10,9 @@ const Task = ({ todo }) => {
   const completeTodo = () => {
     handleComplete(todo);
   };
-  
+
   const deleteTodo = () => {
-    handleDelete(todo.id);
+    handleDelete(todo);
   };
 
   return (
@@ -22,7 +20,7 @@ const Task = ({ todo }) => {
       <span className={'task-title'}>{todo.title}</span>
       <span className={'task-body'}>{todo.body}</span>
       <button onClick={editTodo} className={'edit-btn'}>
-        {!todo.editing ? 'Edit' : 'Save'}
+        {todo.editing ? 'Save' : 'Edit' }
       </button>
       <button onClick={completeTodo} className={'complete-btn'}>
         Complete
