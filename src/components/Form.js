@@ -14,7 +14,6 @@ const Form = () => {
   };
 
   // SUBMIT TODO
-
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAdd(newTodo);

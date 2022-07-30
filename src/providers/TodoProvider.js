@@ -18,20 +18,19 @@ const actionTypes = {
   //CRUD
   getSuccess: 'GET_SUCCESS',
   getError: 'GET_ERROR',
-
   addTodo: 'ADD_TODO',
   completeTodo: 'COMPLETE_TODO',
   deleteTodo: 'DELETE_TODO',
   editTodo: 'EDIT_TODO',
-  updateTodo: 'UPDATE_TODO',
 
   //FORM
   inputChange: 'INPUT_CHANGE',
-  clearValues: 'CLEAR_VALUES',
+  clearForm: 'CLEAR_FORM',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    //ACTION GET SUCCES
     case actionTypes.getSuccess:
       if (state.loading) {
         return {
@@ -42,6 +41,7 @@ const reducer = (state, action) => {
         };
       } else return { ...state };
 
+    //ACTION GET ERROR
     case actionTypes.getError:
       return {
         ...state,
@@ -50,12 +50,14 @@ const reducer = (state, action) => {
         error: console.log('GET ERROR'),
       };
 
+    //ACTION ADD TODO
     case actionTypes.addTodo:
       return {
         ...state,
         todos: [...state.todos, action.payload],
       };
 
+    //ACTION COMPLETE TODO
     case actionTypes.completeTodo:
       return {
         ...state,
@@ -66,16 +68,14 @@ const reducer = (state, action) => {
         ),
       };
 
+    //ACTION DELETE TODO
     case actionTypes.deleteTodo:
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
-        //api: action.api,
       };
-    case actionTypes.updateTodo: {
-      return {};
-    }
 
+    //ACTION EDIT TODO
     case actionTypes.editTodo:
       const findTodo = state.todos.find(
         (todo) => todo.id === action.payload.id
@@ -104,12 +104,15 @@ const reducer = (state, action) => {
         ),
       };
 
+    // ACTION INPUT CHANGE
     case actionTypes.inputChange:
       return {
         ...state,
         [action.field]: action.value,
       };
-    case actionTypes.clearValues:
+
+    // ACTION CLEAR FORM
+    case actionTypes.clearForm:
       return {
         ...state,
         title: '',
@@ -145,7 +148,7 @@ export const TaskProvider = ({ children }) => {
     dispatch({
       type: actionTypes.addTodo,
       payload: todo,
-      //api: axios.post(`${BASE_URL}`, todo),
+      api: axios.post(`${BASE_URL}`, todo),
     });
   };
 
@@ -154,39 +157,40 @@ export const TaskProvider = ({ children }) => {
     dispatch({
       type: actionTypes.deleteTodo,
       payload: todo.id,
-      // api: axios.delete(`${BASE_URL}/${id}`),
+      api: axios.delete(`${BASE_URL}/${todo.id}`),
     });
   };
 
+  //COMPLETE TODO
   const handleComplete = (todo) => {
     dispatch({
       type: actionTypes.completeTodo,
       payload: todo,
-      // api: axios.delete(`${BASE_URL}/${id}`),
+      api: axios.put(`${BASE_URL}/${todo.id}`, {
+        ...todo,
+        isComplete: !todo.isComplete,
+      }),
     });
   };
 
-  const updateTodo = (todo) => {
-    dispatch({
-      type: actionTypes.updateTodo,
-      payload: todo,
-    });
-  };
-
-  const saveTodo = (todo) => {
-    dispatch({
-      type: actionTypes.updateTodo,
-      payload: todo,
-    });
-  };
-
+  //EDIT TODO
   const handleEdit = (todo) => {
     dispatch({
       type: actionTypes.editTodo,
       payload: todo,
+      api:
+        todo.editing === undefined || !todo.editing
+          ? null
+          : axios.put(`${BASE_URL}/${todo.id}`, {
+              ...todo,
+              title: state.title,
+              body: state.body,
+              editing: state.editing,
+            }),
     });
   };
 
+  //INPUT CHANGE
   const handleInputChange = (e) => {
     dispatch({
       type: actionTypes.inputChange,
@@ -195,9 +199,10 @@ export const TaskProvider = ({ children }) => {
     });
   };
 
+  //CLEAR FORM
   const handleClearForm = () => {
     dispatch({
-      type: actionTypes.clearValues,
+      type: actionTypes.clearForm,
     });
   };
 
@@ -213,8 +218,6 @@ export const TaskProvider = ({ children }) => {
         handleEdit,
         handleDelete,
         handleComplete,
-        updateTodo,
-        saveTodo,
       }}
     >
       {children}
