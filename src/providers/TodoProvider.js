@@ -77,16 +77,19 @@ const reducer = (state, action) => {
     }
 
     case actionTypes.editTodo:
-      console.log(state.todos.find((todo) => todo.id === action.payload.id));
+      //console.log(state.todos.find((todo) => todo.id === action.payload.id));
+      const findTodo = state.todos.find((todo) => todo.id === action.payload.id);
+      console.log(findTodo.editing)
       return {
         ...state,
-        title: state.todos.find((todo) => todo.id === action.payload.id).title,
-        body: state.todos.find((todo) => todo.id === action.payload.id).body,
-        editinig: state.todos.find((todo) =>
+        title: findTodo.title,
+        body: findTodo.body,
+        todos: state.todos.map((todo) =>
           todo.id === action.payload.id
-            ?  todo.editing = true
-            : (todo.editing = false)
+            ? { ...todo, editing: todo.editing === undefined ? !todo.editing : !todo.editing}
+            : todo
         ),
+        //todos: (findTodo.editing === undefined || findTodo.editing) ? { ...findTodo, editing: !findTodo.editing} : findTodo,
 
         //editing: action.payload.editing ? {...state, editing: !state.editing} : state.editing
         // editinig: action.payload.editing = true,
