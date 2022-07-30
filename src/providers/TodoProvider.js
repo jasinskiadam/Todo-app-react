@@ -77,41 +77,32 @@ const reducer = (state, action) => {
     }
 
     case actionTypes.editTodo:
-      //console.log(state.todos.find((todo) => todo.id === action.payload.id));
-      const findTodo = state.todos.find((todo) => todo.id === action.payload.id);
-      console.log(findTodo.editing)
+      const findTodo = state.todos.find(
+        (todo) => todo.id === action.payload.id
+      );
+
       return {
         ...state,
         title: findTodo.title,
         body: findTodo.body,
         todos: state.todos.map((todo) =>
           todo.id === action.payload.id
-            ? { ...todo, editing: todo.editing === undefined ? !todo.editing : !todo.editing}
+            ? {
+                ...todo,
+                title:
+                  todo.editing === undefined || todo.editing === false
+                    ? findTodo.title
+                    : state.title,
+                body:
+                  todo.editing === undefined || todo.editing === false
+                    ? findTodo.body
+                    : state.body,
+                editing:
+                  todo.editing === undefined ? !todo.editing : !todo.editing,
+              }
             : todo
         ),
-        //todos: (findTodo.editing === undefined || findTodo.editing) ? { ...findTodo, editing: !findTodo.editing} : findTodo,
-
-        //editing: action.payload.editing ? {...state, editing: !state.editing} : state.editing
-        // editinig: action.payload.editing = true,
       };
-    // const findTodo = state.todos.find((todo) => {
-    //   if (todo.id === action.payload) {
-    //     return { ...todo, editing: !todo.editing };
-    //   }
-    //   //updatedTodo.editing ? saveTodo(updatedTodo) : updatedTodo(updatedTodo);
-
-    //   return console.log(todo);
-    // });
-    // return {
-    //   // const handleEdit = (todo) => {
-    //   //   const findTodo = todos.find((item) => item.id === todo.id);
-    //   //   setTodos({ ...findTodo, editing: !findTodo.editing });
-    //   //   findTodo.editing ? saveTodo(todo) : updateTodo(todo);
-    //   // };
-    //   ...state,
-    //   todos: findTodo,
-    //   //api: action.api,
-    // };
 
     case actionTypes.inputChange:
       return {
@@ -134,8 +125,7 @@ export const TaskProvider = ({ children }) => {
     'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos';
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { title, body, todos } = state;
-  // console.log(`state`, state);
+  const { title, body } = state;
 
   //GET TODOS
   useEffect(() => {
@@ -176,25 +166,6 @@ export const TaskProvider = ({ children }) => {
     });
   };
 
-  // UPDATE TODO
-  // const updateTodo = (todo) => {
-  //   setTodos(
-  //     todos.map((item) => {
-  //       if (item.id === todo.id) {
-  //         setTitle(item.title);
-  //         setBody(item.body);
-  //         return {
-  //           ...item,
-  //           title: item.title,
-  //           body: item.body,
-  //           editing: !item.editing,
-  //         };
-  //       }
-  //       return item;
-  //     })
-  //   );
-  // };
-
   const updateTodo = (todo) => {
     dispatch({
       type: actionTypes.updateTodo,
@@ -208,41 +179,6 @@ export const TaskProvider = ({ children }) => {
       payload: todo,
     });
   };
-
-  // SAVE UPDATED TODO
-
-  // const saveTodo = (todo) => {
-  //   setTodos(
-  //     todos.map((item) => {
-  //       let data = {
-  //         ...item,
-  //         editing: !item.editing,
-  //         title: title,
-  //         body: body,
-  //       };
-
-  //       if (item.editing) {
-  //         setTitle('');
-  //         setBody('');
-
-  //         axios
-  //           .put(`${BASE_URL}/${todo.id}`, data)
-  //           .catch((err) => console.log('PUT error'));
-  //         return data;
-  //       }
-
-  //       return item;
-  //     })
-  //   );
-  // };
-
-  // EDIT TODO
-
-  // const handleEdit = (todo) => {
-  //   const findTodo = todos.find((item) => item.id === todo.id);
-  //   setTodos({ ...findTodo, editing: !findTodo.editing });
-  //   findTodo.editing ? saveTodo(todo) : updateTodo(todo);
-  // };
 
   const handleEdit = (todo) => {
     dispatch({
@@ -269,7 +205,6 @@ export const TaskProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         state,
-        todos,
         title,
         body,
         handleInputChange,
