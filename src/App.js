@@ -1,9 +1,9 @@
 import './App.css';
 import Form from './components/Form';
+import { TaskProvider } from './providers/TodoProvider';
 import TaskContainer from './components/TaskContainer';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Welcome from './components/Welcome';
-import { TaskProvider } from './providers/TaskProvider';
 
 function App() {
   return (

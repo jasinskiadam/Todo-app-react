@@ -1,17 +1,11 @@
 import React, { useContext } from 'react';
-import { TaskContext } from '../providers/TaskProvider';
-import { useForm } from '../hooks/useForm';
-
-const initialFormState = {
-  title: '',
-  body: '',
-};
+import { TaskContext } from '../providers/TodoProvider';
 
 const Form = () => {
-  const { title, body, handleAdd } = useContext(TaskContext);
-  const { handleInputChange, handleClearForm } = useForm(initialFormState);
+  const { title, body, handleAdd, handleInputChange, handleClearForm } =
+    useContext(TaskContext);
 
-  const data = {
+  const newTodo = {
     id: `62d9459af23${Math.random().toString(16).slice(2)}`,
     title: title,
     body: body,
@@ -23,21 +17,21 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(data);
-    handleClearForm(initialFormState);
+    handleAdd(newTodo);
+    handleClearForm();
   };
 
   return (
     <form className='input-bar'>
       <input
-        name='Title'
+        name='title'
         value={title}
         onChange={handleInputChange}
         className={'todo-title'}
         placeholder={'Title...'}
       />
       <input
-        name='Body'
+        name='body'
         value={body}
         onChange={handleInputChange}
         className={'todo-body'}
