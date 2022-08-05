@@ -1,25 +1,14 @@
 {
-  "todos": [
+  "auth": [
     {
       "id": 1,
-      "inputTextTitle": "test1",
-      "inputTextBody": "inputTextBody",
-      "completed": false,
-      "editing": false
+      "name": "Admin",
+      "role": "admin"
     },
     {
       "id": 2,
-      "inputTextTitle": "testst",
-      "inputTextBody": "inputTextBody",
-      "completed": false,
-      "editing": false
-    },
-    {
-      "id": 60.940876463378515,
-      "inputTextTitle": "to",
-      "inputTextBody": "do",
-      "completed": false,
-      "editing": false
+      "name": "User",
+      "role": "user"
     }
   ]
 }
