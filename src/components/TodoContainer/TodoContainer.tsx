@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { useAppSelector } from '../../../hooks/hooks';
-import { useGetTodosQuery } from '../../../redux/features/apiSlice';
+import { useGetTodosQuery } from '../../redux/features/apiSlice';
 import Todo from '../Todo/Todo';
 
 const TodoContainer = () => {
-  //const todos = useAppSelector((state) => state.todosReducer.todos);
-
-  const { data, error, isLoading, isFetching, isSuccess } = useGetTodosQuery(null, {refetchOnMountOrArgChange: 1});
+  const { data, error, isLoading, isFetching, isSuccess } = useGetTodosQuery(
+    null,
+    { refetchOnMountOrArgChange: 1 }
+  );
 
   return (
     <Wrapper>

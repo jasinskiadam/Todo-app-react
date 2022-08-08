@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppSelector } from '../../../hooks/hooks';
-import { TodoT } from '../../../models/todo';
+import { useAppSelector } from '../../hooks/hooks';
+import { TodoT } from '../../models/todo';
 import {
   useDeleteTodoMutation,
   useUpdateTodoMutation,
-} from '../../../redux/features/apiSlice';
+} from '../../redux/features/apiSlice';
 const Todo = ({ todo }: { todo: TodoT }) => {
   const role = useAppSelector((state) => state.roleReducer.role);
   const nav = useNavigate();
@@ -13,7 +13,7 @@ const Todo = ({ todo }: { todo: TodoT }) => {
   const [updateTodo] = useUpdateTodoMutation();
 
   const handleEdit = () => {
-    nav('/todos/edit', { state: { todo }});
+    nav('/todos/edit', { state: { todo } });
   };
 
   const handleComplete = () => {

@@ -1,4 +1,4 @@
-import Dashboard from "../components/todos/Dashboard/Dashboard"
+import Dashboard from "../components/Dashboard/Dashboard"
 
 const Home = () => {
     return <Dashboard />

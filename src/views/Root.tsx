@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from '../components/todos/Header/Header';
-import Menu from '../components/todos/Menu/Menu';
+import Header from '../components/Header/Header';
+import Menu from '../components/Menu/Menu';
 import styled from 'styled-components';
 import GlobalStyles from '../styles/GlobalStyles';
 import AddTodo from './AddTodo';

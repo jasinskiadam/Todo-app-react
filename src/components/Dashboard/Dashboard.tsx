@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useAppDispatch } from '../../../hooks/hooks';
-import { setRole } from '../../../redux/features/roleSlice';
+import { useAppDispatch } from '../../hooks/hooks';
+import { setRole } from '../../redux/features/roleSlice';
 import { flicker } from '../Form/Form';
 
 const Dashboard = () => {
@@ -20,7 +20,7 @@ const Dashboard = () => {
 const Wrapper = styled.div`
   flex-direction: column;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   color: var(--white);
   font-size: 35px;

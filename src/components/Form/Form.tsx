@@ -1,21 +1,31 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { TodoT } from '../../../models/todo';
-import { todosApi } from '../../../redux/features/apiSlice';
-
+import { TodoT } from '../../models/todo';
+import { todosApi } from '../../redux/features/apiSlice';
+import { useLocation } from 'react-router-dom';
 
 const Form = () => {
-
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+  //usage for adding and editing
+  const pathname = window.location.pathname;
+  const editMode = '/todos/edit';
+  const addMode = '/todos/add';
   const nav = useNavigate();
-  
+  const location = useLocation();
+  const state = location.state as TodoT;
+
+  const [title, setTitle] = useState(
+    pathname === editMode ? state.todo.title : ''
+  );
+  const [body, setBody] = useState(
+    pathname === editMode ? state.todo.body : ''
+  );
+
   const [addTodo, { isSuccess }] = todosApi.useAddTodoMutation();
-  if(isSuccess) {
-    nav('/todos')
+  const [updateTodo] = todosApi.useUpdateTodoMutation();
+  if (isSuccess) {
+    nav('/todos');
   }
-  
 
   const newTodo: TodoT = {
     id: `62d9459af23${Math.random().toString(16).slice(2)}`,
@@ -28,10 +38,11 @@ const Form = () => {
   // SUBMIT TODO
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //ADD TO API
-    addTodo(newTodo);
+    pathname === addMode
+      ? addTodo(newTodo)
+      : updateTodo({ ...state.todo, title: title, body: body });
     setTitle('');
-    setBody('')
+    setBody('');
   };
 
   return (
@@ -50,7 +61,7 @@ const Form = () => {
         className={'todo-body'}
         placeholder={'Body...'}
       />
-      <AddBtn type='submit'>Add</AddBtn>
+      <AddBtn type='submit'>{pathname === addMode ? 'Add' : 'Save'}</AddBtn>
     </Wrapper>
   );
 };
