@@ -1,4 +1,4 @@
-import Form from "../components/todos/Form/Form"
+import Form from "../components/Form/Form"
 
 const AddTodo = () => {
     return <Form />
